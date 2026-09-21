@@ -1,0 +1,32 @@
+{
+  "id": "./",
+  "name": "برنامج خدمات قرية الحرية",
+  "short_name": "خدمات الحرية",
+  "description": "منصة خدمات قرية الحرية",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
+  "orientation": "portrait",
+  "background_color": "#eef8f4",
+  "theme_color": "#087f5b",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

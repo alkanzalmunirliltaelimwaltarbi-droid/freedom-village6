@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="منصة خدمات قرية الحرية">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>برنامج خدمات قرية الحرية</title>
+</head>
+<body>
+  <div class="app-bg"></div>
+
+  <section id="loginView" class="screen">
+    <main class="login-card glass">
+      <div class="brand-mark"><img src="./assets/freedom-village-logo.png" alt="شعار برنامج خدمات قرية الحرية"></div>
+      <h1>برنامج خدمات قرية الحرية</h1>
+      <p class="muted">تسجيل الدخول بالرمز</p>
+
+      <form id="loginForm" class="stack">
+        <label for="accessCode">رمز الدخول</label>
+        <input id="accessCode" name="accessCode" autocomplete="one-time-code" autocapitalize="characters"
+               placeholder="أدخل رمز الدخول" required maxlength="80">
+        <button class="primary big" type="submit">دخول</button>
+        <button id="installBtn" class="install-btn" type="button" hidden>تثبيت التطبيق على الهاتف</button>
+        <p id="installHelp" class="install-help" hidden></p>
+      </form>
+      <div id="loginError" class="error" role="alert"></div>
+      <p class="footer-credit">مصمم البرنامج الشيخ علي العثمان حفظه اللّٰه تعالى لعام ١٤٤٨هـ.</p>
+    </main>
+  </section>
+
+  <section id="mainView" class="hidden">
+    <header class="topbar glass">
+      <div>
+        <div class="eyebrow">منصة قرية الحرية</div>
+        <strong id="welcomeName">مرحباً</strong>
+      </div>
+      <div class="top-actions">
+        <span id="onlineState" class="status-dot">متصل</span>
+        <button id="logoutBtn" class="icon-btn" title="تسجيل الخروج">↪</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section id="home" class="tab-section active">
+        <div class="hero glass">
+          <div>
+            <div class="eyebrow">أهلاً بكم</div>
+            <h2>خدمات قرية الحرية</h2>
+            <p>منصة موحدة للأخبار والخدمات والشكاوى والمقترحات.</p>
+          </div>
+          <div class="clock-box">
+            <strong id="clock">--:--:--</strong>
+            <span id="gregorianDate">—</span>
+            <span id="hijriDate">—</span>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <article class="card glass">
+            <div class="card-title"><span>📰</span><b>آخر خبر</b></div>
+            <p id="newsPreview">لا توجد أخبار حالياً.</p>
+          </article>
+          <article class="card glass">
+            <div class="card-title"><span>🕌</span><b>الصلاة القادمة</b></div>
+            <p id="nextPrayer">لم تُدخل أوقات الصلاة بعد.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="news" class="tab-section">
+        <div class="section-head"><h2>الأخبار والإعلانات</h2></div>
+        <div id="newsList" class="stack"></div>
+      </section>
+
+      <section id="prayer" class="tab-section">
+        <div class="section-head"><h2>المسجد وأوقات الصلاة</h2></div>
+        <div id="prayerList" class="grid two"></div>
+      </section>
+
+      <section id="services" class="tab-section">
+        <div class="section-head"><h2>الخدمات</h2></div>
+        <div id="servicesList" class="grid two"></div>
+      </section>
+
+      <section id="events" class="tab-section">
+        <div class="section-head"><h2>الفعاليات والمواعيد</h2></div>
+        <div id="eventsList" class="stack"></div>
+      </section>
+
+      <section id="emergency" class="tab-section">
+        <div class="section-head"><h2>جهات الاتصال والطوارئ</h2></div>
+        <div id="emergencyList" class="grid two"></div>
+      </section>
+
+      <section id="complaints" class="tab-section">
+        <div class="section-head"><h2>الشكاوى</h2><p>أرسل شكواك وتابع حالتها.</p></div>
+        <form id="complaintForm" class="card glass stack">
+          <label>عنوان الشكوى<input id="complaintTitle" required maxlength="160"></label>
+          <label>التفاصيل<textarea id="complaintBody" required maxlength="5000"></textarea></label>
+          <button class="primary" type="submit">إرسال الشكوى</button>
+          <div id="complaintMsg" class="message"></div>
+        </form>
+        <h3 class="subhead">شكاواي</h3>
+        <div id="myComplaints" class="stack"></div>
+      </section>
+
+      <section id="suggestions" class="tab-section">
+        <div class="section-head"><h2>المقترحات</h2><p>شارك باقتراح مفيد للقرية.</p></div>
+        <form id="suggestionForm" class="card glass stack">
+          <label>عنوان المقترح<input id="suggestionTitle" required maxlength="160"></label>
+          <label>التفاصيل<textarea id="suggestionBody" required maxlength="5000"></textarea></label>
+          <button class="primary" type="submit">إرسال المقترح</button>
+          <div id="suggestionMsg" class="message"></div>
+        </form>
+        <h3 class="subhead">مقترحاتي</h3>
+        <div id="mySuggestions" class="stack"></div>
+      </section>
+
+      <section id="about" class="tab-section">
+        <div class="section-head"><h2>عن البرنامج</h2></div>
+        <article class="card glass"><p id="aboutText">لا توجد معلومات مضافة بعد.</p></article>
+      </section>
+
+      <section id="admin" class="tab-section" hidden>
+        <div class="section-head">
+          <h2>لوحة المشرف</h2>
+          <p>إدارة محتوى المنصة والشكاوى والمقترحات.</p>
+        </div>
+
+        <div id="stats" class="grid four"></div>
+
+        <div class="admin-tabs glass">
+          <button class="chip active" data-panel="adminNews">الأخبار</button>
+          <button class="chip" data-panel="adminPrayer">الصلاة</button>
+          <button class="chip" data-panel="adminServices">الخدمات</button>
+          <button class="chip" data-panel="adminEvents">الفعاليات</button>
+          <button class="chip" data-panel="adminEmergency">الطوارئ</button>
+          <button class="chip" data-panel="adminCases">الشكاوى والمقترحات</button>
+          <button class="chip" data-panel="adminAbout">عن البرنامج</button>
+        </div>
+
+        <div id="adminNews" class="admin-panel active">
+          <form id="newsForm" class="card glass stack">
+            <h3>إضافة خبر</h3>
+            <label>العنوان<input id="newsTitle" required maxlength="200"></label>
+            <label>النص<textarea id="newsBody" required maxlength="10000"></textarea></label>
+            <button class="primary">حفظ الخبر</button>
+          </form>
+          <div id="adminNewsList" class="stack"></div>
+        </div>
+
+        <div id="adminPrayer" class="admin-panel">
+          <form id="prayerForm" class="card glass grid two">
+            <label>التاريخ<input id="prayerDate" type="date" required></label>
+            <label>الفجر<input id="fajr" type="time"></label>
+            <label>الشروق<input id="sunrise" type="time"></label>
+            <label>الظهر<input id="dhuhr" type="time"></label>
+            <label>العصر<input id="asr" type="time"></label>
+            <label>المغرب<input id="maghrib" type="time"></label>
+            <label>العشاء<input id="isha" type="time"></label>
+            <button class="primary full" type="submit">حفظ أوقات الصلاة</button>
+          </form>
+          <div id="adminPrayerList" class="stack"></div>
+        </div>
+
+        <div id="adminServices" class="admin-panel">
+          <form id="serviceForm" class="card glass stack">
+            <h3>إضافة خدمة</h3>
+            <label>اسم الخدمة<input id="serviceName" required maxlength="200"></label>
+            <label>الوصف<textarea id="serviceDescription" maxlength="5000"></textarea></label>
+            <button class="primary">حفظ الخدمة</button>
+          </form>
+          <div id="adminServicesList" class="stack"></div>
+        </div>
+
+        <div id="adminEvents" class="admin-panel">
+          <form id="eventForm" class="card glass stack">
+            <h3>إضافة فعالية</h3>
+            <label>العنوان<input id="eventTitle" required maxlength="200"></label>
+            <label>الموعد<input id="eventDate" type="datetime-local"></label>
+            <label>الوصف<textarea id="eventDescription" maxlength="5000"></textarea></label>
+            <button class="primary">حفظ الفعالية</button>
+          </form>
+          <div id="adminEventsList" class="stack"></div>
+        </div>
+
+        <div id="adminEmergency" class="admin-panel">
+          <form id="emergencyForm" class="card glass stack">
+            <h3>إضافة جهة اتصال</h3>
+            <label>الاسم<input id="emergencyName" required maxlength="200"></label>
+            <label>الهاتف<input id="emergencyPhone" required maxlength="80"></label>
+            <label>الوصف<textarea id="emergencyDescription" maxlength="2000"></textarea></label>
+            <button class="primary">حفظ جهة الاتصال</button>
+          </form>
+          <div id="adminEmergencyList" class="stack"></div>
+        </div>
+
+        <div id="adminCases" class="admin-panel">
+          <h3>الشكاوى</h3>
+          <div id="adminComplaintList" class="stack"></div>
+          <h3 class="subhead">المقترحات</h3>
+          <div id="adminSuggestionList" class="stack"></div>
+        </div>
+
+        <div id="adminAbout" class="admin-panel">
+          <form id="settingsForm" class="card glass stack">
+            <h3>معلومات عن البرنامج</h3>
+            <textarea id="aboutInput" maxlength="10000"></textarea>
+            <button class="primary">حفظ</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav glass" aria-label="التنقل">
+      <button class="nav-item active" data-tab="home">⌂<span>الرئيسية</span></button>
+      <button class="nav-item" data-tab="news">▤<span>الأخبار</span></button>
+      <button class="nav-item" data-tab="prayer">◷<span>الصلاة</span></button>
+      <button class="nav-item" data-tab="services">▦<span>الخدمات</span></button>
+      <button class="nav-item" data-tab="complaints">✉<span>الشكاوى</span></button>
+      <button class="nav-item" data-tab="suggestions">☷<span>المقترحات</span></button>
+      <button id="adminNav" class="nav-item" data-tab="admin" hidden>⚙<span>الإدارة</span></button>
+    </nav>
+
+    <footer class="site-footer">مصمم البرنامج الشيخ علي العثمان حفظه اللّٰه تعالى لعام ١٤٤٨هـ.</footer>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
